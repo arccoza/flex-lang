@@ -6,14 +6,19 @@ var tokens = require('./tokens.json')
 
 
 class FlexLang {
+  constructor({format = 'js'} = {}) {
+    this.format = format
+  }
+
   parse(str) {
+    var format = this.format
     var style = {}
     var childStyle = {}
     var reDirection = /^(-?RC|-?CR)(?::(.*)|$)/
     var reDistribution = /(?:([MCA]{1,3})(\[[-~\s]*\]))/g
     var [, direction, distributions = str] = str.match(reDirection) || []
     // print(tokens['direction'][direction])
-    style[tokens['property']['js']['direction']] = tokens['direction'][direction]
+    style[tokens['property'][format]['direction']] = tokens['direction'][direction]
 
     // m: match, p: properties, d: distribution, s: stretch
     for (let m, p, d, s; m = reDistribution.exec(distributions);) {
@@ -28,7 +33,7 @@ class FlexLang {
       let val = null
       for (let k of [...p]) {
         print(k)
-        let prop = tokens['property']['js'][k]
+        let prop = tokens['property'][format][k]
         // let val = null
 
         print(val)
@@ -56,5 +61,5 @@ class FlexLang {
   }
 }
 
-var fl = new FlexLang()
+var fl = new FlexLang({format: 'css'})
 fl.parse('-RC:M[-- ]MCA[ ~ ~ ]')
