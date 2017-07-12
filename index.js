@@ -10,7 +10,7 @@ class FlexLang {
     this.format = format
   }
 
-  parse(str) {
+  layout(str) {
     var format = this.format
     var style = {}
     var childStyle = {}
@@ -62,4 +62,4 @@ class FlexLang {
 }
 
 var fl = new FlexLang({format: 'css'})
-fl.parse('-RC:M[-- ]MCA[ ~ ~ ]')
+fl.layout('-RC:M[-- ]MCA[ ~ ~ ]')
