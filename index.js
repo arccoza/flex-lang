@@ -57,9 +57,9 @@ class FlexLang {
       }
     }
 
-    print(style, childStyle)
+    return [style, childStyle]
   }
 }
 
 var fl = new FlexLang({format: 'css'})
-fl.layout('-RC:M[-- ]MCA[ ~ ~ ]')
+print(...fl.layout('-RC:M[-- ]MCA[ ~ ~ ]'))
