@@ -15,7 +15,7 @@ class FlexLang {
     var style = {}
     var childStyle = {}
     var reDirection = /(-?H|-?V)(?:,\s*)|$/
-    var reWrapping = /(<<|>>|><)(?:,\s*)|$/
+    var reWrapping = /([<>/\s]{2,3})(?:,\s*)|$/
     var reDistribution = /(?:([JAS]{1,3})(\[[-~\s]*\]))/g
     var direction, wrapping, distributions
 
@@ -74,4 +74,4 @@ class FlexLang {
 }
 
 var fl = new FlexLang({format: 'css'})
-print(...fl.layout('-H, >>, J[-- ], JAS[ ~ ~ ]'))
+print(...fl.layout('-H, </>, J[-- ], JAS[ ~ ~ ]'))
