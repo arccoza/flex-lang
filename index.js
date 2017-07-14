@@ -14,11 +14,19 @@ class FlexLang {
     var format = this.format
     var style = {}
     var childStyle = {}
-    var reDirection = /^(-?RC|-?CR)(?::(.*)|$)/
+    var reDirection = /(-?H|-?V)(?:,\s*)|$/
+    var reWrapping = /(<<|>>|><)(?:,\s*)|$/
     var reDistribution = /(?:([MCA]{1,3})(\[[-~\s]*\]))/g
-    var [, direction, distributions = str] = str.match(reDirection) || []
-    // print(tokens['direction'][direction])
-    style[tokens['property'][format]['direction']] = tokens['direction'][direction]
+    var direction, wrapping, distributions
+
+    distributions = str
+      .replace(reDirection, (r, t) => (print(r), direction = t, ''))
+      .replace(reWrapping, (r, t) => (print(r), wrapping = t, ''))
+
+    if (direction)
+      style[tokens['property'][format]['direction']] = tokens['direction'][direction]
+    if (wrapping)
+      style[tokens['property'][format]['wrapping']] = tokens['wrapping'][wrapping]
 
     // m: match, p: properties, d: distribution, s: stretch
     for (let m, p, d, s; m = reDistribution.exec(distributions);) {
@@ -59,7 +67,11 @@ class FlexLang {
 
     return [style, childStyle]
   }
+
+  orient(str) {
+    // ~(1 0 0), #2, [ -- ]
+  }
 }
 
 var fl = new FlexLang({format: 'css'})
-print(...fl.layout('-RC:M[-- ]MCA[ ~ ~ ]'))
+print(...fl.layout('-H, >>, M[-- ], MCA[ ~ ~ ]'))
