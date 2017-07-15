@@ -22,7 +22,6 @@ class FlexLang {
       }],
 
       [/([<>][/\s]?[<>])(?:,\s*)|$/, function*([, m]) {
-        printd(m)
         yield [tokens['property'][format]['wrapping'], tokens['wrapping'][m]]
       }],
 
@@ -32,6 +31,12 @@ class FlexLang {
           yield [tokens['property'][format][k], v]
         }
       }],
+    ]
+
+    this.reMap2 = [
+      ['direction', /(-?H|-?V)(?:,\s*)|$/],
+      ['wrapping', /([<>][/\s]?[<>])(?:,\s*)|$/],
+      ['distribution', /(?:([JAS]{1,3})(\[[-~\s]*\]))/g],
     ]
   }
 
@@ -48,14 +53,29 @@ class FlexLang {
     //   .replace(reDirection, (r, t) => (print(r), direction = t, ''))
     //   .replace(reWrapping, (r, t) => (print(r), wrapping = t, ''))
 
-    for (let [re, fn] of this.reMap) {
+    // for (let [re, fn] of this.reMap) {
+    //   for (let m of hunt(re, str)) {
+    //     for (let [k, v] of fn(m))
+    //       style[k] = v
+    //       // print(k, v)
+    //   }
+    // }
+
+    for (let [nm, re] of this.reMap2) {
       for (let m of hunt(re, str)) {
-        for (let [k, v] of fn(m))
-          style[k] = v
-          // print(k, v)
-        // let [k, v] = fn(m)
-        // style[k] = v
-        // print(fn(m))
+        switch (nm) {
+          case 'direction':
+          case 'wrapping':
+            var [, t] = m
+            style[tokens['property'][format][nm]] = tokens[nm][t]
+            break
+          case 'distribution':
+            var [, p, t] = m
+            var v = tokens[nm][t]
+            for (let k of [...p])
+              style[tokens['property'][format][k]] = v
+            break
+        }
       }
     }
 
