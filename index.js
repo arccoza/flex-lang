@@ -6,6 +6,13 @@ var printe = console.error.bind(console)
 var tokens = require('./tokens.json')
 
 
+function* hunt(re, str) {
+  if (!re.global)
+    yield re.exec(str)
+  else
+    for (let m; m = re.exec(str);) yield m
+}
+
 class FlexLang {
   constructor({format = 'js'} = {}) {
     this.format = format
