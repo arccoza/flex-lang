@@ -21,7 +21,8 @@ class FlexLang {
         yield [tokens['property'][format]['direction'], tokens['direction'][m]]
       }],
 
-      [/([<>/\s]{2,3})(?:,\s*)|$/, function*([, m]) {
+      [/([<>][/\s]?[<>])(?:,\s*)|$/, function*([, m]) {
+        printd(m)
         yield [tokens['property'][format]['wrapping'], tokens['wrapping'][m]]
       }],
 
@@ -109,4 +110,4 @@ class FlexLang {
 }
 
 var fl = new FlexLang({format: 'css'})
-print(...fl.layout('-H, </>, J[-- ], JAS[ -  - ]'))
+print(...fl.layout('-H, >>, J[-- ], JAS[ -  - ]'))
