@@ -1,3 +1,4 @@
+"use strict"
 var print = console.log.bind(console)
 var printd = console.dir.bind(console)
 var printw = console.warn.bind(console)
