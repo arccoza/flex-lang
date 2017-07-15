@@ -16,6 +16,22 @@ function* hunt(re, str) {
 class FlexLang {
   constructor({format = 'js'} = {}) {
     this.format = format
+    this.reMap = [
+      [/(-?H|-?V)(?:,\s*)|$/, function*([, m]) {
+        yield [tokens['property'][format]['direction'], tokens['direction'][m]]
+      }],
+
+      [/([<>/\s]{2,3})(?:,\s*)|$/, function*([, m]) {
+        yield [tokens['property'][format]['wrapping'], tokens['wrapping'][m]]
+      }],
+
+      [/(?:([JAS]{1,3})(\[[-~\s]*\]))/g, function*([, p, d]) {
+        let v = tokens['distribution'][d]
+        for (let k of [...p]) {
+          yield [tokens['property'][format][k], v]
+        }
+      }],
+    ]
   }
 
   layout(str) {
