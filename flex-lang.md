@@ -9,35 +9,45 @@ H[--]_[||];
 * column-reverse: -V
 
 ## flex-wrap
-* wrap: > instead of ]
-* wrap-reverse: < instead of [
-* nowrap: .
+* wrap: >>
+* wrap-reverse: <<
+* nowrap: ><
 
-## justify-content
-* default: [--]
-* flex-start: [-- ]
-* flex-end: [ --]
+## justify-content & align-content
+* initial: []
+* flex-start: [-- ], [--  ]
+* flex-end: [ --], [  --]
 * center: [ -- ]
-* space-between: [- -]
-* space-around: [ - - ]
+* baseline: [ - -]
+* space-between: [- -], [-  -]
+* space-around: [ - - ], [ -  - ]
+* space-evenly: [  -  -  ]
 * use ~ instead of - to set flex: 1 on children
 
 ## align-items
-* default:
-* flex-start: <
-* flex-end: >
-* center: +
+* initial: []
+* flex-start: [-- ], [--  ]
+* flex-end: [ --], [  --]
+* center: [ -- ]
+* baseline: [ - -]
 * stetch: ~
-* baseline: _
 
-## align-content
-* default: [||]
-* flex-start: [|| ]
-* flex-end: [ ||]
-* center: [ || ]
-* stretch: [|~|]
-* space-between: [| |]
-* space-around: [ | | ]
+# Orient
+~(1 0 0), #2, [ -- ]
+
+## flex
+* ~({VALUES})
+* Can use * inplace of auto.
+
+## order
+* A # followed by the order number.
+
+## align
+* A[] or just []
+
+## justify
+* J[]
+
 
 ## margins
 ### horizontal
