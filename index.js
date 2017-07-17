@@ -20,7 +20,7 @@ function* hunt(re, str) {
 class FlexLang {
   constructor({format = 'js'} = {}) {
     this.format = format
-    this.reMap = [
+    this.reLayout = [
       ['direction', /(-?H|-?V)(?:,\s*)|$/],
       ['wrapping', /([<>][/\s]?[<>])(?:,\s*)|$/],
       ['distribution', /(?:([JAS]{1,3})(\[[-~\s]*\]))/g],
@@ -32,7 +32,7 @@ class FlexLang {
     var style = {}
     var childStyle = {}
 
-    for (let [nm, re] of this.reMap) {
+    for (let [nm, re] of this.reLayout) {
       for (let m of hunt(re, str)) {
         switch (nm) {
           case 'direction':
