@@ -7,10 +7,14 @@ var tokens = require('./tokens.json')
 
 
 function* hunt(re, str) {
+  re.lastIndex = 0
   if (!re.global)
     yield re.exec(str)
   else
-    for (let m; m = re.exec(str);) yield m
+    for (let m; m = re.exec(str);) {
+      re.lastIndex = m.index === re.lastIndex ? re.lastIndex + 1 : re.lastIndex
+      yield m
+    }
 }
 
 class FlexLang {
