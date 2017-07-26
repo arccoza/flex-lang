@@ -25,6 +25,11 @@ class FlexLang {
       ['wrapping', /([<>][/\s]?[<>])(?:,\s*)|$/],
       ['distribution', /(?:([JAS]{1,3})(\[[-~\s]*\]))/g],
     ]
+    this.reOrient = [
+      ['flexibility', /(~)\((.*)\)(?:(?:,\s*)|$)/],
+      ['ordering', /(\#)(\d*)(?:(?:,\s*)|$)/],
+      ['distribution', /(?:([JA]{0,2})(\[[-~\s]*\]))/g],
+    ]
   }
 
   layout(str) {
