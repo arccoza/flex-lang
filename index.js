@@ -60,8 +60,35 @@ class FlexLang {
 
   orient(str) {
     // ~(1 0 0), #2, [ -- ]
+    var format = this.format
+    var style = {}
+
+    for (let [nm, re] of this.reOrient) {
+      for (let m of hunt(re, str)) {
+        switch (nm) {
+          case 'flexibility':
+            var [, v] = m
+            style[tokens['property'][format]['orient'][nm]] = v
+            break
+          case 'ordering':
+            var [, v] = m
+            style[tokens['property'][format]['orient'][nm]] = v
+            break
+          case 'distribution':
+            var [, p, t] = m
+            p = p ? p : 'A'  // `align-self` is the default if no prefix provided.
+            var v = tokens[nm][t]
+            for (let k of [...p])
+              style[tokens['property'][format]['orient'][k]] = v
+            break
+        }
+      }
+    }
+
+    return style
   }
 }
 
 var fl = new FlexLang({format: 'css'})
-print(...fl.layout('-H, >>, J[-- ], JAS[ -  - ]'))
+// print(...fl.layout('-H, >>, J[-- ], JAS[ -  - ]'))
+print(fl.orient('~(1 0 0), #2, [ -  - ]'))
