@@ -1,6 +1,6 @@
 {
   "name": "flex-lang",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A concise, visual, language for flexbox layouts.",
   "main": "index.js",
   "repository": "github.com/arccoza/flex-lang",
