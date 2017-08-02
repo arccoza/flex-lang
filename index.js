@@ -66,9 +66,6 @@ class FlexLang {
       for (let m of hunt(re, str)) {
         switch (nm) {
           case 'flexibility':
-            var [, v] = m
-            style[tokens['property'][format]['orient'][nm]] = v
-            break
           case 'ordering':
             var [, v] = m
             style[tokens['property'][format]['orient'][nm]] = v
