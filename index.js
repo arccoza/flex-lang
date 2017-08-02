@@ -35,7 +35,6 @@ class FlexLang {
   layout(str) {
     var format = this.format
     var style = {}
-    var childStyle = {}
 
     for (let [nm, re] of this.reLayout) {
       for (let m of hunt(re, str)) {
@@ -55,7 +54,7 @@ class FlexLang {
       }
     }
 
-    return [style, childStyle]
+    return style
   }
 
   orient(str) {
@@ -90,5 +89,5 @@ class FlexLang {
 }
 
 var fl = new FlexLang({format: 'css'})
-// print(...fl.layout('-H, >>, J[-- ], JAS[ -  - ]'))
-print(fl.orient('~(1 0 0), #2, [ -  - ]'))
+print(fl.layout('-H, >>, J[--  ], AS[ -  - ]'))
+print(fl.orient('~(1 0 0), #2, JA[----]'))
