@@ -85,6 +85,9 @@ class FlexLang {
   }
 }
 
+module.exports = FlexLang
+
+
 var fl = new FlexLang({format: 'css'})
 print(fl.layout('-H, >>, J[--  ], AS[ -  - ]'))
 print(fl.orient('~(1 0 0), #2, JA[----]'))
